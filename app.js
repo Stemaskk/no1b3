@@ -27,17 +27,14 @@ function spanOk(text)  { return `<span class="ok">${text}</span>`; }
 function spanBad(text) { return `<span class="bad">${text}</span>`; }
 
 // ---------- answer key ----------
-// NOTE: For Q1, you didn’t specify the correct facility. I set a sensible default
-// ("Learning Commons")—change it below if needed.
 const correct = {
-    "b3-facility": "Learning Commons",    // <-- change if the real answer is different
+    "b3-facility": "Computer Labs",                 // ← updated per your request
     "b3-ctc": "3415",
     "b3-floor5": ["Tutoring Lab", "Library", "MESA"]
 };
 
-// Optional redirect after OK (leave empty to disable)
-// const REDIRECT_URL = "https://ohlonecicada.netlify.app/";
-const REDIRECT_URL = "";
+// Redirect after OK
+const REDIRECT_URL = "https://ohlonecicada.netlify.app/";
 
 // ---------- checker (no spoilers) ----------
 function checkAllAnswers(ans) {
@@ -46,7 +43,7 @@ function checkAllAnswers(ans) {
 
     // Q1: Facility
     const fac = ans["b3-facility"] || "";
-    const facOK = fac === correct["b3-facility"];
+    const facOK = fac.toLowerCase() === correct["b3-facility"].toLowerCase();
     lines.push(`Q1 (Facility): ${fac || "—"} → ${facOK ? spanOk("Correct") : spanBad("Wrong")}`);
     allCorrect &&= facOK;
 
@@ -61,8 +58,6 @@ function checkAllAnswers(ans) {
     const floor5OK = sameSet(floor5, correct["b3-floor5"]);
     lines.push(`Q3 (Floor 5): [${floor5.join(", ") || "—"}] → ${floor5OK ? spanOk("Correct") : spanBad("Wrong")}`);
     allCorrect &&= floor5OK;
-
-    // If you add Q4/Q5 later, extend checks here.
 
     return { html: lines.join("\n"), allCorrect };
 }
@@ -101,7 +96,7 @@ form.addEventListener("submit", (e) => {
 
 okBtn.addEventListener("click", () => {
     hideModal();
-    if (REDIRECT_URL) window.location.href = REDIRECT_URL;
+    window.location.href = REDIRECT_URL; // redirect to main page
 });
 
 overlay.addEventListener("click", hideModal);
