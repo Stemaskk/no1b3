@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Building 3 — Unified Checker</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="container">
+    <h1>Building 3 Questionnaire</h1>
+    <p class="subtitle">Answer all questions and click “Check Answers”. Get them all right to reveal the code.</p>
+</header>
+
+<main class="container">
+    <!-- One unified form/card -->
+    <form id="quiz-form" class="qa-form" novalidate>
+        <section class="card" aria-labelledby="b3-title">
+            <h2 id="b3-title">Building 3</h2>
+
+            <!-- Q1 (Facility MC) -->
+            <fieldset class="q">
+                <legend>1) Which facility is most associated with <strong>Building 3</strong>?</legend>
+                <div class="choices">
+                    <label><input type="radio" name="b3-facility" value="Learning Commons"> Learning Commons</label>
+                    <label><input type="radio" name="b3-facility" value="Science Labs"> Science Labs</label>
+                    <label><input type="radio" name="b3-facility" value="Cafeteria"> Cafeteria</label>
+                    <label><input type="radio" name="b3-facility" value="Computer labs"> Computer labs</label>
+                </div>
+                <small class="help">Choose one.</small>
+            </fieldset>
+
+            <!-- Q2 (Room number typed) -->
+            <fieldset class="q">
+                <legend>2) What is the room number of the <strong>Communication Tutor Center</strong>?</legend>
+                <input id="b3-ctc" name="b3-ctc" type="text" inputmode="numeric" placeholder="e.g., 3415" required />
+                <small class="help">Type the room number.</small>
+            </fieldset>
+
+            <!-- Q3 (Multi-answer) -->
+            <fieldset class="q">
+                <legend>3) What is located on <strong>Floor 5</strong>? (Select all that apply)</legend>
+                <div class="choices grid">
+                    <label><input type="checkbox" name="b3-floor5" value="Tutoring Lab"> Tutoring Lab</label>
+                    <label><input type="checkbox" name="b3-floor5" value="Counseling"> Counseling</label>
+                    <label><input type="checkbox" name="b3-floor5" value="Library"> Library</label>
+                    <label><input type="checkbox" name="b3-floor5" value="MESA"> MESA</label>
+                    <label><input type="checkbox" name="b3-floor5" value="Professor Offices"> Professor Offices</label>
+                </div>
+                <small class="help">Select all that are located on Floor 5.</small>
+            </fieldset>
+
+            <!-- (Optional) Add Q4 / Q5 later:
+            <fieldset class="q">...</fieldset>
+            <fieldset class="q">...</fieldset>
+            -->
+
+            <!-- Actions -->
+            <div class="actions">
+                <button id="checkAll" type="submit" class="btn">Check Answers</button>
+                <button type="button" class="btn ghost" id="resetAll">Reset</button>
+            </div>
+        </section>
+    </form>
+
+    <!-- Feedback -->
+    <section class="card" aria-labelledby="results-title">
+        <h2 id="results-title">Results</h2>
+        <output id="results" class="output" aria-live="polite"></output>
+    </section>
+</main>
+
+<!-- Modal for access code -->
+<div id="modal-overlay" class="overlay hidden" aria-hidden="true"></div>
+<div id="access-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <h3 id="modal-title">Access Granted</h3>
+    <p>Your code is:</p>
+    <pre class="access-code">M3SA</pre>
+    <div class="modal-actions">
+        <button id="modal-ok" class="btn">OK</button>
+    </div>
+</div>
+
+<footer class="container footer">
+    <small>All checking is done locally in your browser.</small>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
