@@ -1,4 +1,4 @@
-// app.js (hardened)
+// Building 3 — redirect, no popup
 
 document.addEventListener("DOMContentLoaded", () => {
     // ---------- helpers ----------
@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 data[name] = value;
             }
         }
+        // ensure unchecked checkbox groups appear as empty arrays
         formEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
             if (!fd.has(cb.name)) data[cb.name] = [];
         });
@@ -65,13 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
     form.setAttribute("action", "javascript:void(0)");
 
     form.addEventListener("submit", (e) => {
-        e.preventDefault(); // <- prevents reload
+        e.preventDefault();
         e.stopPropagation();
 
         const ok = allAnswersCorrect(collectForm(form));
         if (ok) {
             results.textContent = "All correct! Redirecting…";
-            // slight delay so the message shows before navigation
+            // small delay so the message paints before navigation
             setTimeout(() => { window.location.href = REDIRECT_URL; }, 50);
         } else {
             results.textContent = "Not quite — try again.";
